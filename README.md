@@ -1,4 +1,4 @@
-hostcals-CALS-2013-WP-Theme
-===========================
+CALS-2013-WP-Theme
+==================
 
-On the hostcals server, The newest Wordpress template.
+The newest Wordpress template utilized at http://cals.wisc.edu

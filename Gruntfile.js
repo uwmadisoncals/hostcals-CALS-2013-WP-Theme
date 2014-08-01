@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
       build: {
-        src: ['js/jquery-1.7.1.min.js','js/jquery.ui.js','js/jquery.iosslider.js','js/jquery.isotope.min.js','js/jquery-css-transform.js','js/jquery-rotate.js','js/browserdetect.js','js/mainactions.js','js/min/gsapi.min.js','js/blurobjs.js','library/scripts/vallenato.js'],
+        src: ['js/jquery-1.7.1.min.js','js/jquery.ui.js','js/flipclock.js','js/jquery.iosslider.js','js/jquery.isotope.min.js','js/jquery-css-transform.js','js/jquery-rotate.js','js/browserdetect.js','js/mainactions.js','js/min/gsapi.min.js','js/blurobjs.js','library/scripts/vallenato.js'],
         dest: 'js/min/master.min.js'
       }
     },
@@ -32,16 +32,23 @@ module.exports = function(grunt) {
   watch: {
 	  scripts: {
 	    files: ['js/*.js'],
-	    tasks: ['uglify']
-	    
+	    tasks: ['uglify'],
+	    options: {
+	      livereload: true,
+	    },
 	  },
 	  css: {
 	    files: '**/*.scss',
-	    tasks: ['sass','concat']
-	    
+	    tasks: ['sass','concat'],
+		options: {
+	      livereload: true,
+	    },
+
 	  }
 	},
-	
+
+
+
 	imagemin: {                          // Task
 	    dynamic: {                         // Another target
 	      files: [{
@@ -52,7 +59,7 @@ module.exports = function(grunt) {
 	      }]
 	    }
 	  }
-    
+
   });
   grunt.event.on('watch', function(action, filepath, target) {
   grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
@@ -64,7 +71,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
-  
+
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
@@ -72,7 +79,8 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['concat']);
   grunt.registerTask('default', ['watch']);
   grunt.registerTask('default', ['imagemin']);
-  
- 
+
+
+
 
 };
