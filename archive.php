@@ -1,78 +1,105 @@
 <?php
 /**
- * The template for displaying Archive pages.
- *
- * Used to display archive-type pages if nothing more specific matches a query.
- * For example, puts together date-based pages if no date.php file exists.
+ * The template for displaying archive pages.
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
- * @package WordPress
- * @subpackage CALSv1
- * @since CALS 1.0
+ *
+ * @package WP Boilerplate
  */
 
 get_header(); ?>
 
-<div class="mobileScroll">
-<a href="#" class="mobileNavTriggerLarge" style="display: none;"></a>
+	<section id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-	<div id="main">
+		<?php if ( have_posts() ) : ?>
 
-		<div id="primary">
-			<div id="content" role="main">
-
-			<?php if ( have_posts() ) : ?>
-
-				<header class="page-header">
-					<h1 class="page-title">
-						<?php if ( is_day() ) : ?>
-							<?php printf( __( 'Daily Archives: %s', 'twentyeleven' ), '<span>' . get_the_date() . '</span>' ); ?>
-						<?php elseif ( is_month() ) : ?>
-							<?php printf( __( 'Monthly Archives: %s', 'twentyeleven' ), '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'twentyeleven' ) ) . '</span>' ); ?>
-						<?php elseif ( is_year() ) : ?>
-							<?php printf( __( 'Yearly Archives: %s', 'twentyeleven' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'twentyeleven' ) ) . '</span>' ); ?>
-						<?php else : ?>
-							<?php _e( 'Blog Archives', 'twentyeleven' ); ?>
-						<?php endif; ?>
-					</h1>
-				</header>
-
-				<?php twentyeleven_content_nav( 'nav-above' ); ?>
-
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-
+			<header class="page-header">
+				<h1 class="page-title">
 					<?php
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'content', get_post_format() );
+						if ( is_category() ) :
+							single_cat_title();
+
+						elseif ( is_tag() ) :
+							single_tag_title();
+
+						elseif ( is_author() ) :
+							printf( __( 'Author: %s', 'wp-boilerplate' ), '<span class="vcard">' . get_the_author() . '</span>' );
+
+						elseif ( is_day() ) :
+							printf( __( 'Day: %s', 'wp-boilerplate' ), '<span>' . get_the_date() . '</span>' );
+
+						elseif ( is_month() ) :
+							printf( __( 'Month: %s', 'wp-boilerplate' ), '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'wp-boilerplate' ) ) . '</span>' );
+
+						elseif ( is_year() ) :
+							printf( __( 'Year: %s', 'wp-boilerplate' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'wp-boilerplate' ) ) . '</span>' );
+
+						elseif ( is_tax( 'post_format', 'post-format-aside' ) ) :
+							_e( 'Asides', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) :
+							_e( 'Galleries', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-image' ) ) :
+							_e( 'Images', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-video' ) ) :
+							_e( 'Videos', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-quote' ) ) :
+							_e( 'Quotes', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-link' ) ) :
+							_e( 'Links', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-status' ) ) :
+							_e( 'Statuses', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-audio' ) ) :
+							_e( 'Audios', 'wp-boilerplate' );
+
+						elseif ( is_tax( 'post_format', 'post-format-chat' ) ) :
+							_e( 'Chats', 'wp-boilerplate' );
+
+						else :
+							_e( 'Archives', 'wp-boilerplate' );
+
+						endif;
 					?>
+				</h1>
+				<?php
+					// Show an optional term description.
+					$term_description = term_description();
+					if ( ! empty( $term_description ) ) :
+						printf( '<div class="taxonomy-description">%s</div>', $term_description );
+					endif;
+				?>
+			</header><!-- .page-header -->
 
-				<?php endwhile; ?>
+			<?php /* Start the Loop */ ?>
+			<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php twentyeleven_content_nav( 'nav-below' ); ?>
+				<?php
+					/* Include the Post-Format-specific template for the content.
+					 * If you want to override this in a child theme, then include a file
+					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+					 */
+					get_template_part( 'content', get_post_format() );
+				?>
 
-			<?php else : ?>
+			<?php endwhile; ?>
 
-				<article id="post-0" class="post no-results not-found">
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'Nothing Found', 'twentyeleven' ); ?></h1>
-					</header><!-- .entry-header -->
+			<?php wp_boilerplate_paging_nav(); ?>
 
-					<div class="entry-content">
-						<p><?php _e( 'Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.', 'twentyeleven' ); ?></p>
-						<?php get_search_form(); ?>
-					</div><!-- .entry-content -->
-				</article><!-- #post-0 -->
+		<?php else : ?>
 
-			<?php endif; ?>
+			<?php get_template_part( 'content', 'none' ); ?>
 
-			</div><!-- #content -->
-		<?php get_sidebar(); ?>
-<div class="clear"></div>
-		</div>
-	</div>
+		<?php endif; ?>
+
+		</main><!-- #main -->
+	</section><!-- #primary -->
+
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>
-</div>

@@ -1,40 +1,32 @@
 <?php
 /**
- * The Template for displaying all single posts.
- * @package WordPress
- * @subpackage CALSv1
- * @since CALS 1.0
+ * The template for displaying all single posts.
+ *
+ * @package WP Boilerplate
  */
 
 get_header(); ?>
 
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-	<div id="main">
+		<?php while ( have_posts() ) : the_post(); ?>
 
-		<div id="primary">
-			<div id="content" role="main">
+			<?php get_template_part( 'content', 'single' ); ?>
 
-				<?php while ( have_posts() ) : the_post(); ?>
+			<?php wp_boilerplate_post_nav(); ?>
 
-					<nav id="nav-single">
-						<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentyeleven' ); ?></h3>
-						<span class="nav-previous"><?php previous_post_link( '%link', __( '<span class="meta-nav">&larr;</span> Previous', 'twentyeleven' ) ); ?></span>
-						<span class="nav-next"><?php next_post_link( '%link', __( 'Next <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) ); ?></span>
-					</nav><!-- #nav-single -->
+			<?php
+				// If comments are open or we have at least one comment, load up the comment template
+				if ( comments_open() || '0' != get_comments_number() ) :
+					comments_template();
+				endif;
+			?>
 
-					<?php get_template_part( 'content', 'single' ); ?>
+		<?php endwhile; // end of the loop. ?>
 
-					<?php comments_template( '', true ); ?>
+		</main><!-- #main -->
+	</div><!-- #primary -->
 
-				<?php endwhile; // end of the loop. ?>
-
-			</div><!-- #content -->
-			<?php get_sidebar(); ?>
-			<div class="clear"></div>
-
-		</div><!-- #primary -->
-
-	</div>
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>
-
-</div>
