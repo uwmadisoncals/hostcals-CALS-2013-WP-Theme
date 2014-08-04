@@ -1708,6 +1708,10 @@ object {
 	visibility: hidden;
 }
 
+.home .collegeFeature div.timer {
+  display: none !important;
+}
+
 /*
 Post Formats Headings
 To hide the headings, display: none the ".entry-header .entry-format" selector,
@@ -1967,6 +1971,9 @@ border-bottom-left-radius: 2px;
 	font-size: 17px;
 	margin: 0;
 }
+
+
+
 
 
 /* =Image
