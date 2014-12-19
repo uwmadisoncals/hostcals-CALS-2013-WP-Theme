@@ -1761,7 +1761,7 @@ object {
 	visibility: hidden;
 }
 
-.home .collegeFeature div.timer {
+.collegeFeature div.timer {
   display: none !important;
 }
 
@@ -5705,7 +5705,7 @@ background-size: 100% auto;
 }
 
 .home .collegeFeature .timer {
-	display: block;
+	display: none;
 	position: absolute;
 	bottom: 190px;
 	right: 10px;
