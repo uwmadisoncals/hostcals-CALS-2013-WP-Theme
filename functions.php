@@ -38,6 +38,18 @@
  */
 
 
+function my_login_logo() { ?>
+    <style type="text/css">
+        body.login div#login h1 a {
+            background-image: url(<?php echo get_template_directory_uri(); ?>/images/site-login-logo.png);
+            height: 102px;
+            background-size: 270px 102px;
+            width: 270px;
+        }
+    </style> 
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
+
 function cc_mime_types( $mimes ){
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
