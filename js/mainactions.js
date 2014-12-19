@@ -181,6 +181,12 @@ var countFeatures = 0;
 	 		anchoredFooter(); 
 	 		imageBoxFit();
 	 		
+	 		
+	 		var hoh = $(".headeroverlay").height();
+	 	
+	 var nhoh = -359 + hoh;
+	 $(".page #main, .single #main").css("margin-top",nhoh);
+	 		
 	 		var wHeight = $(window).height();
 	 		$("#mobile-menu-inner").height(wHeight);
 
