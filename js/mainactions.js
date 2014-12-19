@@ -174,7 +174,7 @@ var countFeatures = 0;
 	 	var hoh = $(".headeroverlay").height();
 	 	
 	 var nhoh = -359 + hoh;
-	 $("#main").css("margin-top",nhoh);
+	 $(".page #main, .single #main").css("margin-top",nhoh);
 	  
 	  //recheck when the window is resized
 	  $( window ).resize(function() {
