@@ -183,9 +183,13 @@ var countFeatures = 0;
 	 		
 	 		
 	 		var hoh = $(".headeroverlay").height();
-	 	
-	 var nhoh = -359 + hoh;
-	 $(".page #main, .single #main").css("margin-top",nhoh);
+	 	if(hoh != 0) {
+	 		var nhoh = -359 + hoh;
+	 		$(".page #main, .single #main").css("margin-top",nhoh);
+	 
+	 	} else {
+		 	$(".page #main, .single #main").css("margin-top","-250px");
+	 	}
 	 		
 	 		var wHeight = $(window).height();
 	 		$("#mobile-menu-inner").height(wHeight);
