@@ -171,10 +171,14 @@ var countFeatures = 0;
 	  $(".headeroverlay, .headerbgBlur, .headerbgBlurImage").height($(".navWrapper").height());
 	 $(".headerbgBlur, .headerbgBlurImage").width($(".navWrapper").width()); 
 	 
-	 	var hoh = $(".headeroverlay").height();
-	 	
-	 var nhoh = -359 + hoh;
-	 $(".page #main, .single #main").css("margin-top",nhoh);
+	 if($("body").hasClass("home")) {
+		 
+	} else {
+		 var hoh = $(".headeroverlay").height();	
+		 var nhoh = -359 + hoh;
+		 $(".page #main, .single #main").css("margin-top",nhoh);
+	  
+	  }
 	  
 	  //recheck when the window is resized
 	  $( window ).resize(function() {
