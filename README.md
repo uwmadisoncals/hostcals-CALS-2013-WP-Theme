@@ -1,4 +1,8 @@
 hostcals-CALS-2013-WP-Theme
 ===========================
 
-On the hostcals server, The newest Wordpress template.
+The newest Wordpress template utilized at http://cals.wisc.edu
+
+In MU Theme Directory, by organizational convention, folder named: calsmain2013
+
+This is on HOSTCALS.
